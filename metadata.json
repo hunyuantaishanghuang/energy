@@ -1,0 +1,6 @@
+{
+  "name": "MiMo 能源系统演化与碳达峰仿真展映平台",
+  "description": "面向“评估—预测—优化”三层分析框架与宏观能源结构演化的交互式学术放映厅、Three.js 3D数字沙盘与AI科研图解工坊",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
