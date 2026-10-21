@@ -27,6 +27,7 @@ import {
   MIMO_SCENARIOS,
   ENERGY_SOURCES,
   PRESET_CAPTURED_FRAMES,
+  getAssetUrl,
 } from './constants/videoData';
 import {
   WorkspaceTab,
@@ -471,7 +472,7 @@ export default function App() {
                   <video
                     ref={videoRef}
                     src={currentVideoSrc}
-                    poster="/thumbnails/thumb_0s.jpg"
+                    poster={getAssetUrl('thumbnails/thumb_0s.jpg')}
                     preload="auto"
                     playsInline
                     crossOrigin="anonymous"

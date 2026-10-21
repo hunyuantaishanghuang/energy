@@ -6,12 +6,22 @@ import {
   CapturedFrameAsset,
 } from '../types/video';
 
-export const DEFAULT_VIDEO_PATH = '/video.mp4';
+const rawBase = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL
+  ? import.meta.env.BASE_URL
+  : './';
+const BASE = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
+export const getAssetUrl = (relativePath: string) => {
+  const clean = relativePath.replace(/^\/+/, '');
+  return `${BASE}${clean}`;
+};
+
+export const DEFAULT_VIDEO_PATH = getAssetUrl('video.mp4');
 export const FALLBACK_VIDEO_PATHS = [
-  '/video.mp4',
+  getAssetUrl('video.mp4'),
+  getAssetUrl('assets/video.mp4'),
+  getAssetUrl('assets/aistudio/_______________________87599efc.mp4'),
   '/api/video',
-  '/assets/video.mp4',
-  '/assets/aistudio/_______________________87599efc.mp4',
 ];
 
 export const ENERGY_SOURCES: EnergySourceMeta[] = [
@@ -437,7 +447,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     title: '“评估—预测—优化”三层分析框架',
     subtitle: '构建宏观与微观耦合的能源系统顶层方法论',
     sectionCategory: '理论框架',
-    thumbnailUrl: '/thumbnails/thumb_5s.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/thumb_5s.jpg'),
     keyFormulaOrMetric: 'Tier 1: 历史评估 · Tier 2: 动态预测 · Tier 3: 闭环优化',
     academicScript:
       '本研究首先构建了“评估—预测—优化”的三层递进式分析框架。底层对历史能源消费与OWID真实碳排放靶值进行精确校准；中层引入多智能体动态演化预测；顶层通过政策调节因子与技术学习反馈实现系统级寻优。',
@@ -455,7 +465,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     title: '政—企—用三方动态博弈与宏观涌现',
     subtitle: '企业投资改变电源结构与发电成本，进而传导至终端电价',
     sectionCategory: '理论框架',
-    thumbnailUrl: '/thumbnails/timeline_02.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/timeline_02.jpg'),
     keyFormulaOrMetric: '政府政策规制 ⇄ 企业电源投资 ⇄ 用户用能响应 → 宏观能源演化',
     academicScript:
       '在能源系统内部，政府、企业与用户构成紧密耦合的三方反馈闭环：政府制定碳配额与绿证政策；企业根据收益预期调整风光火储投资组合，从而改变电源结构与平均发电成本；成本变化通过电价机制传导至用户侧，最终自底向上涌现出宏观能源结构演化。',
@@ -475,7 +485,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     sectionCategory: '闭环仿真',
     scenarioId: 'bau',
     defaultYear: 2030,
-    thumbnailUrl: '/thumbnails/thumb_60s.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/thumb_60s.jpg'),
     keyFormulaOrMetric: '2030 MiMo闭环: policy_adj = 1.10 · 技术转型倍率 → 1.19',
     academicScript:
       '在基准情景（BAU）下，2025年煤炭占比已由历史高点68%降至46%，2030年进一步降至37%，而光伏占比跃升至38%首次超越煤电。左侧折线图显示毛CO2与净CO2排放量在2028—2030年间达峰后进入稳步下降通道。',
@@ -495,7 +505,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     sectionCategory: '闭环仿真',
     scenarioId: 'policy',
     defaultYear: 2045,
-    thumbnailUrl: '/thumbnails/timeline_06.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/timeline_06.jpg'),
     keyFormulaOrMetric: '2045 MiMo闭环: policy_adj = 1.15 · 技术转型倍率 → 1.39',
     academicScript:
       '政策强化情景设定了更高的碳价乘数与更严格的碳配额紧缩路径。到2045年，policy_adj提升至1.15，强政策信号激发了1.39倍的技术转型倍率，使煤炭占比大幅压缩至22%，光伏占比达46%，风电达18%。',
@@ -515,7 +525,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     sectionCategory: '闭环仿真',
     scenarioId: 'risk',
     defaultYear: 2045,
-    thumbnailUrl: '/thumbnails/thumb_105s.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/thumb_105s.jpg'),
     keyFormulaOrMetric: '2045 MiMo闭环: policy_adj = 0.92 · 技术转型倍率 → 1.22',
     academicScript:
       '在极端风险情景下，考虑到极端气象导致风光出力骤降或国际供应链冲击，系统主动将 policy_adj 下调至0.92，适度暂缓激进替代步伐，在2045年仍保留29%的煤炭份额作为电力系统安全压舱石。',
@@ -535,7 +545,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     sectionCategory: '闭环仿真',
     scenarioId: 'tech',
     defaultYear: 2045,
-    thumbnailUrl: '/thumbnails/timeline_09.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/timeline_09.jpg'),
     keyFormulaOrMetric: '2045 MiMo闭环: policy_adj = 1.12 · 技术转型倍率 → 1.35',
     academicScript:
       '最后是技术突破情景：2030年 policy_adj 仅为1.05（2045年为1.12），这使系统在相对温和的政策干预下，凭借高达1.35的技术转型倍率实现光伏47%、风电18%的极高清洁占比，避免了过激碳价对宏观经济造成的冲击。',
@@ -555,7 +565,7 @@ export const ACADEMIC_CHAPTERS: AcademicChapter[] = [
     sectionCategory: '政策建议',
     scenarioId: 'tech',
     defaultYear: 2045,
-    thumbnailUrl: '/thumbnails/timeline_11.jpg',
+    thumbnailUrl: getAssetUrl('thumbnails/timeline_11.jpg'),
     keyFormulaOrMetric: '容量电价保底护盾 + 碳配额缓冲池天平 = 安全与低碳协同',
     academicScript:
       '基于上述四情景仿真结论，研究提出核心政策建议：其一，加快新型电力系统建设；其二，推动煤电向支撑调节电源转型，通过容量电价保底保障其调峰生存空间；其三，强化绿证与碳市场协同；其四，建立碳配额缓冲池以平抑碳价剧烈波动。',
@@ -643,8 +653,8 @@ export const ACADEMIC_VIDEO_FILTERS: AcademicVideoFilter[] = [
 export const PRESET_CAPTURED_FRAMES: CapturedFrameAsset[] = [
   {
     id: 'preset-frame-1',
-    dataUrl: '/thumbnails/thumb_5s.jpg',
-    localAssetPath: '/thumbnails/thumb_5s.jpg',
+    dataUrl: getAssetUrl('thumbnails/thumb_5s.jpg'),
+    localAssetPath: getAssetUrl('thumbnails/thumb_5s.jpg'),
     timestamp: 5.0,
     chapterTitle: '01. “评估—预测—优化”三层分析框架',
     label: '三层分析框架定格帧 (00:05)',
@@ -653,8 +663,8 @@ export const PRESET_CAPTURED_FRAMES: CapturedFrameAsset[] = [
   },
   {
     id: 'preset-frame-2',
-    dataUrl: '/thumbnails/timeline_02.jpg',
-    localAssetPath: '/thumbnails/timeline_02.jpg',
+    dataUrl: getAssetUrl('thumbnails/timeline_02.jpg'),
+    localAssetPath: getAssetUrl('thumbnails/timeline_02.jpg'),
     timestamp: 22.0,
     chapterTitle: '02. 政—企—用三方动态博弈',
     label: '政府-企业-用户三方闭环图 (00:22)',
@@ -663,8 +673,8 @@ export const PRESET_CAPTURED_FRAMES: CapturedFrameAsset[] = [
   },
   {
     id: 'preset-frame-3',
-    dataUrl: '/thumbnails/thumb_60s.jpg',
-    localAssetPath: '/thumbnails/thumb_60s.jpg',
+    dataUrl: getAssetUrl('thumbnails/thumb_60s.jpg'),
+    localAssetPath: getAssetUrl('thumbnails/thumb_60s.jpg'),
     timestamp: 60.0,
     chapterTitle: '03. 基准情景 (2030年MiMo闭环)',
     label: '2030基准情景仿真看板 (01:00)',
@@ -673,8 +683,8 @@ export const PRESET_CAPTURED_FRAMES: CapturedFrameAsset[] = [
   },
   {
     id: 'preset-frame-4',
-    dataUrl: '/thumbnails/thumb_150s.jpg',
-    localAssetPath: '/thumbnails/thumb_150s.jpg',
+    dataUrl: getAssetUrl('thumbnails/thumb_150s.jpg'),
+    localAssetPath: getAssetUrl('thumbnails/thumb_150s.jpg'),
     timestamp: 150.0,
     chapterTitle: '07. 推动煤电向支撑调节电源转型',
     label: '风光储与煤电容量保底示意图 (02:30)',
@@ -683,8 +693,8 @@ export const PRESET_CAPTURED_FRAMES: CapturedFrameAsset[] = [
   },
   {
     id: 'preset-frame-5',
-    dataUrl: '/thumbnails/timeline_11.jpg',
-    localAssetPath: '/thumbnails/timeline_11.jpg',
+    dataUrl: getAssetUrl('thumbnails/timeline_11.jpg'),
+    localAssetPath: getAssetUrl('thumbnails/timeline_11.jpg'),
     timestamp: 162.0,
     chapterTitle: '07. 建立碳配额缓冲池平抑碳价波动',
     label: '四项核心政策建议总览图 (02:42)',
